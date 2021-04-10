@@ -7,8 +7,8 @@ namespace airplanereservationsystem.Models
     {
         public string AirportCode { get; set; }
         public int LegNum { get; set; }
-        public int RouteNum { get; set; }
         public string ScheduleDepTime { get; set; }
+        public int RouteNum { get; set; }
 
         public virtual Airport AirportCodeNavigation { get; set; }
         public virtual FlightLeg LegNumNavigation { get; set; }

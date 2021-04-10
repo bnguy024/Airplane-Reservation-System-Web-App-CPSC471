@@ -16,8 +16,8 @@ namespace airplanereservationsystem.Models
 
         public string AirportCode { get; set; }
         public string City { get; set; }
-        public string Country { get; set; }
         public string ProvinceState { get; set; }
+        public string Country { get; set; }
 
         public virtual ICollection<AirplaneRoute> AirplaneRoute { get; set; }
         public virtual ICollection<Arrival> Arrival { get; set; }

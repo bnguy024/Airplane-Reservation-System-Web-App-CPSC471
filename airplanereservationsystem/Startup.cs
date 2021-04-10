@@ -30,7 +30,7 @@ namespace airplanereservationsystem
 
         {
             services.AddDbContext<airplanereservationsystemContext>(options => options.UseMySql(Configuration.GetConnectionString("airplanereservationsystem")));
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,16 +40,24 @@ namespace airplanereservationsystem
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+       
+                endpoints.MapControllerRoute(
+                      name: "default",
+                      pattern: "{controller=Home}/{action=index}/{id?}"
+                      );
             });
         }
     }

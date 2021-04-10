@@ -16,10 +16,10 @@ namespace airplanereservationsystem.Models
             Ticket = new HashSet<Ticket>();
         }
 
-        public string CheckInStatus { get; set; }
+        public int ReservationSystemId { get; set; }
         public string CustomerName { get; set; }
         public int? JobNo { get; set; }
-        public int ReservationSystemId { get; set; }
+        public string CheckInStatus { get; set; }
 
         public virtual ICollection<Administrator> Administrator { get; set; }
         public virtual ICollection<AirlineCompany> AirlineCompany { get; set; }

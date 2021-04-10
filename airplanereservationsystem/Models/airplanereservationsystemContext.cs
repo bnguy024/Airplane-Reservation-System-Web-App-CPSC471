@@ -41,7 +41,7 @@ namespace airplanereservationsystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=honghung;database=airplanereservationsystem;");
+                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=honghung;database=airplanereservationsystem");
             }
         }
 
@@ -374,7 +374,12 @@ namespace airplanereservationsystem.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.PhoneNum).HasColumnName("phone_num");
+                entity.Property(e => e.PhoneNum)
+                    .IsRequired()
+                    .HasColumnName("phone_num")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.ReservationSystemId).HasColumnName("reservation_system_id");
 
