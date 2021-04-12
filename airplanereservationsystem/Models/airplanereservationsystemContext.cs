@@ -41,7 +41,7 @@ namespace airplanereservationsystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;password=honghung;database=airplanereservationsystem");
+                optionsBuilder.UseMySql("name=airplanereservationsystem");
             }
         }
 
@@ -207,22 +207,28 @@ namespace airplanereservationsystem.Models
                 entity.Property(e => e.RouteNum).HasColumnName("route_num");
 
                 entity.Property(e => e.AirportCode)
+                    .IsRequired()
                     .HasColumnName("airport_code")
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.AmountOfTime).HasColumnName("amount_of_time");
+                entity.Property(e => e.AmountOfTime)
+                    .HasColumnName("amount_of_time")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
-                    .HasColumnType("varchar(45)")
+                    .HasColumnType("varchar(255)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.HasOne(d => d.AirportCodeNavigation)
                     .WithMany(p => p.AirplaneRoute)
                     .HasForeignKey(d => d.AirportCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_airport_code");
             });
 
@@ -321,6 +327,12 @@ namespace airplanereservationsystem.Models
                 entity.Property(e => e.LegNum).HasColumnName("Leg_num");
 
                 entity.Property(e => e.RouteNum).HasColumnName("Route_num");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.ScheduleArrTime)
                     .HasColumnName("schedule_arr_time")
@@ -487,13 +499,19 @@ namespace airplanereservationsystem.Models
 
                 entity.Property(e => e.LegNum).HasColumnName("Leg_num");
 
-                entity.Property(e => e.RouteNum).HasColumnName("Route_num");
+                entity.Property(e => e.RouteNum).HasColumnName("route_num");
 
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
-                    .HasColumnType("varchar(45)")
+                    .HasColumnType("varchar(255)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.HasOne(d => d.RouteNumNavigation)
+                    .WithOne(p => p.FlightLeg)
+                    .HasForeignKey<FlightLeg>(d => d.RouteNum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_route_num");
             });
 
             modelBuilder.Entity<GetsInfoFrom>(entity =>
@@ -504,7 +522,7 @@ namespace airplanereservationsystem.Models
                 entity.ToTable("gets info from");
 
                 entity.HasIndex(e => e.AirlineCompanyName)
-                    .HasName("fk_gif_airlinecompanyname_idx");
+                    .HasName("fk_gif_airlineCompanyName_idx");
 
                 entity.HasIndex(e => e.AirportCode)
                     .HasName("fk_gif_airportcode_idx");
@@ -528,7 +546,7 @@ namespace airplanereservationsystem.Models
                     .HasPrincipalKey(p => p.AirlineCompanyName)
                     .HasForeignKey(d => d.AirlineCompanyName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_gif_airlinecompanyname");
+                    .HasConstraintName("fk_gif_airlineCompanyName");
 
                 entity.HasOne(d => d.AirportCodeNavigation)
                     .WithMany(p => p.GetsInfoFrom)
@@ -641,7 +659,7 @@ namespace airplanereservationsystem.Models
                     .HasPrincipalKey(p => p.AirlineCompanyName)
                     .HasForeignKey(d => d.AirlineCompanyName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_airline_company_name");
+                    .HasConstraintName("fk_airplane_company_name");
 
                 entity.HasOne(d => d.Airplane)
                     .WithMany(p => p.OwnsAirplane)

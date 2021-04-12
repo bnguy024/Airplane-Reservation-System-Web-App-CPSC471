@@ -5,9 +5,9 @@ namespace airplanereservationsystem.Models
 {
     public partial class GetsInfoFrom
     {
-        public int ReservationSystemId { get; set; }
         public string AirlineCompanyName { get; set; }
         public string AirportCode { get; set; }
+        public int ReservationSystemId { get; set; }
 
         public virtual Airplane AirlineCompanyNameNavigation { get; set; }
         public virtual Airport AirportCodeNavigation { get; set; }

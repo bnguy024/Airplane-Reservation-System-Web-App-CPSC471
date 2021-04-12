@@ -19,6 +19,7 @@ namespace airplanereservationsystem.Models
         public int RouteNum { get; set; }
         public string Status { get; set; }
 
+        public virtual AirplaneRoute RouteNumNavigation { get; set; }
         public virtual ICollection<Arrival> ArrivalLegNumNavigation { get; set; }
         public virtual ICollection<Arrival> ArrivalRouteNumNavigation { get; set; }
         public virtual ICollection<Departure> DepartureLegNumNavigation { get; set; }

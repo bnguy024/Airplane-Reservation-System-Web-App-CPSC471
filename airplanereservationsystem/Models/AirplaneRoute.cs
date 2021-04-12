@@ -10,12 +10,13 @@ namespace airplanereservationsystem.Models
             Flies = new HashSet<Flies>();
         }
 
-        public int RouteNum { get; set; }
         public string AirportCode { get; set; }
+        public string AmountOfTime { get; set; }
+        public int RouteNum { get; set; }
         public string Status { get; set; }
-        public int? AmountOfTime { get; set; }
 
         public virtual Airport AirportCodeNavigation { get; set; }
+        public virtual FlightLeg FlightLeg { get; set; }
         public virtual ICollection<Flies> Flies { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Customer>
-@{ Layout = "_Layout"; ViewBag.Title = "Customers";}
+﻿@model IEnumerable<Arrival>
+@{ Layout = "_Layout"; ViewBag.Title = "Arrivals";}
 
 <h2>All Reservations</h2>
 <a asp-action="AddReservation" class="btn btn-sm btn-primary">Add Reservation</a>
@@ -8,37 +8,21 @@
 <table class="table table-sm table-striped table-bordered m-2">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Adress</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Reservation Id</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th>Route Number</th>
+            <th>Airport</th>
+            <th>Scheduled Arrival Date</th>
+            <th>Scheduled Arrival Time</th>
+      
         </tr>
     </thead>
     <tbody>
         @foreach (var r in Model)
         {
         <tr>
-            <td>@r.UserId</td>
-            <td>@r.CustomerId</td>
-            <td>@r.Address</td>
-            <td>@r.Email</td>
-            <td>@r.PhoneNum</td>
-            <td>@r.ReservationSystemId</td>
-            <td>
-                <a asp-action="UpdateReservation" asp-route-id="@r.UserId">
-                    <img src="/icon/edit.png" />
-                </a>
-            </td>
-            <td>
-                <form asp-action="DeleteReservation" method="post">
-                    <input type="hidden" value="@r.UserId" name="UserId" />
-                    <input type="image" src="/icon/close.png" />
-                </form>
-            </td>
+            <td>@r.RouteNum</td>
+            <td>@r.AirportCode</td>
+            <td>@r.Date</td>
+            <td>@r.ScheduleArrTime</td>
         </tr>
         }
     </tbody>

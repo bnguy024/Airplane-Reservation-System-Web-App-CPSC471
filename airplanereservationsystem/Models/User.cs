@@ -12,9 +12,9 @@ namespace airplanereservationsystem.Models
             GoesTo = new HashSet<GoesTo>();
         }
 
-        public int UserId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+        public int UserId { get; set; }
 
         public virtual ICollection<Administrator> Administrator { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }

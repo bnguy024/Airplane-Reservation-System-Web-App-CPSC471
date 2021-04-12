@@ -14,11 +14,11 @@ namespace airplanereservationsystem.Models
             OwnsAirplane = new HashSet<Owns>();
         }
 
-        public int AirplaneId { get; set; }
         public string AirlineCompanyName { get; set; }
-        public int? TotalNumSeats { get; set; }
-        public string Pilot { get; set; }
+        public int AirplaneId { get; set; }
         public string ModelType { get; set; }
+        public string Pilot { get; set; }
+        public int? TotalNumSeats { get; set; }
 
         public virtual AirplaneType AirplaneTypeAirplane { get; set; }
         public virtual ICollection<AirplaneType> AirplaneTypeModelTypeNavigation { get; set; }
