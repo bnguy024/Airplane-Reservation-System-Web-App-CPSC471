@@ -117,6 +117,23 @@ namespace airplanereservationsystem.Controllers
         {
             return View();
         }
+        public ViewResult AddDepartureReservation() => View();
+        [HttpPost]
+        public async Task<IActionResult> AddDepartureReservation(Departure departure)
+        {
+            Departure receivedReservation = new Departure();
+            using (var httpClient = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(departure), Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PostAsync("https://localhost:5001/api/Departures", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    receivedReservation = JsonConvert.DeserializeObject<Departure>(apiResponse);
+                }
+            }
+            return View(receivedReservation);
+        }
     }
 }
 
