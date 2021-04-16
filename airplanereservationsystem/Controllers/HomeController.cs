@@ -73,6 +73,11 @@ namespace airplanereservationsystem.Controllers
             }
             return View(reservationList);
         }
+
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
     }
 }
        
