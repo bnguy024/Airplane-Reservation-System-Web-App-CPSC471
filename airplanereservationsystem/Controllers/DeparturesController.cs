@@ -28,10 +28,10 @@ namespace airplanereservationsystem.Controllers
         }
 
         // GET: api/Departures/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Departure>> GetDeparture(string id)
+        [HttpGet("{routenum}")]
+        public async Task<ActionResult<Departure>> GetDeparture(int routenum)
         {
-            var departure = await _context.Departure.FindAsync(id);
+            var departure = _context.Departure.Where(pub => pub.RouteNum == routenum).FirstOrDefault();
 
             if (departure == null)
             {
@@ -44,10 +44,10 @@ namespace airplanereservationsystem.Controllers
         // PUT: api/Departures/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDeparture(string id, Departure departure)
+        [HttpPut("{routenum}")]
+        public async Task<IActionResult> PutDeparture(int routenum, Departure departure)
         {
-            if (id != departure.AirportCode)
+            if (routenum != departure.RouteNum)
             {
                 return BadRequest();
             }
@@ -60,7 +60,7 @@ namespace airplanereservationsystem.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DepartureExists(id))
+                if (!DepartureExists(routenum))
                 {
                     return NotFound();
                 }
@@ -86,7 +86,7 @@ namespace airplanereservationsystem.Controllers
             }
             catch (DbUpdateException)
             {
-                if (DepartureExists(departure.AirportCode))
+                if (DepartureExists(departure.RouteNum))
                 {
                     return Conflict();
                 }
@@ -96,14 +96,14 @@ namespace airplanereservationsystem.Controllers
                 }
             }
 
-            return CreatedAtAction("GetDeparture", new { id = departure.AirportCode }, departure);
+            return CreatedAtAction("GetDeparture", new { routenum = departure.RouteNum}, departure);
         }
 
         // DELETE: api/Departures/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Departure>> DeleteDeparture(string id)
+        [HttpDelete("{routenum}")]
+        public async Task<ActionResult<Departure>> DeleteDeparture(int routenum)
         {
-            var departure = await _context.Departure.FindAsync(id);
+            var departure = await _context.Departure.FindAsync(routenum);
             if (departure == null)
             {
                 return NotFound();
@@ -115,9 +115,9 @@ namespace airplanereservationsystem.Controllers
             return departure;
         }
 
-        private bool DepartureExists(string id)
+        private bool DepartureExists(int routenum)
         {
-            return _context.Departure.Any(e => e.AirportCode == id);
+            return _context.Departure.Any(e => e.RouteNum== routenum);
         }
     }
 }
