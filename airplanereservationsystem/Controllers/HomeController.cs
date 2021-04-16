@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using airplanereservationsystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,10 +39,10 @@ namespace airplanereservationsystem.Controllers
             return View(reservations);
         }
 
-        public ViewResult GetReservation() => View();
+        public ViewResult GetArrivalReservation() => View();
 
         [HttpPost]
-        public async Task<IActionResult> GetReservation(int Route)
+        public async Task<IActionResult> GetArrivalReservation(int Route)
         {
             Arrival arrival = new Arrival();
             using (var httpClient = new HttpClient())
@@ -73,13 +74,49 @@ namespace airplanereservationsystem.Controllers
             }
             return View(reservationList);
         }
+        public ViewResult AddArrivalReservation() => View();
 
+        [HttpPost]
+        public async Task<IActionResult> AddArrivalReservation(Arrival arrival)
+        {
+            Arrival receivedReservation = new Arrival();
+            using (var httpClient = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(arrival), Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PostAsync("https://localhost:5001/api/Arrivals", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    receivedReservation = JsonConvert.DeserializeObject<Arrival>(apiResponse);
+                }
+            }
+            return View(receivedReservation);
+        }
+        public ViewResult GetDepartureReservation() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> GetDepartureReservation(int Route)
+        {
+            Departure departure = new Departure();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Departures/" + Route))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        departure = JsonConvert.DeserializeObject<Departure>(apiResponse);
+                    }
+                    else
+                        ViewBag.StatusCode = response.StatusCode;
+                }
+            }
+            return View(departure);
+        }
         public ActionResult LoginPage()
         {
             return View();
         }
     }
 }
-       
-    
 
