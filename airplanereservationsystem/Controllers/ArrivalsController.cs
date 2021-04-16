@@ -44,10 +44,10 @@ namespace airplanereservationsystem.Controllers
         // PUT: api/Arrivals/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutArrival(string id, Arrival arrival)
+        [HttpPut("{routenum}")]
+        public async Task<IActionResult> PutArrival(int routenum, Arrival arrival)
         {
-            if (id != arrival.AirportCode)
+            if (routenum != arrival.RouteNum)
             {
                 return BadRequest();
             }
@@ -60,7 +60,7 @@ namespace airplanereservationsystem.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ArrivalExists(id))
+                if (!ArrivalExists(routenum))
                 {
                     return NotFound();
                 }
@@ -86,7 +86,7 @@ namespace airplanereservationsystem.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ArrivalExists(arrival.AirportCode))
+                if (ArrivalExists(arrival.RouteNum))
                 {
                     return Conflict();
                 }
@@ -96,14 +96,14 @@ namespace airplanereservationsystem.Controllers
                 }
             }
 
-            return CreatedAtAction("GetArrival", new { id = arrival.AirportCode }, arrival);
+            return CreatedAtAction("GetArrival", new { routenum = arrival.RouteNum }, arrival);
         }
 
         // DELETE: api/Arrivals/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Arrival>> DeleteArrival(string id)
+        [HttpDelete("{routenum}")]
+        public async Task<ActionResult<Arrival>> DeleteArrival(int routenum)
         {
-            var arrival = await _context.Arrival.FindAsync(id);
+            var arrival = await _context.Arrival.FindAsync(routenum);
             if (arrival == null)
             {
                 return NotFound();
@@ -115,9 +115,9 @@ namespace airplanereservationsystem.Controllers
             return arrival;
         }
 
-        private bool ArrivalExists(string id)
+        private bool ArrivalExists(int routenum)
         {
-            return _context.Arrival.Any(e => e.AirportCode == id);
+            return _context.Arrival.Any(e => e.RouteNum == routenum);
         }
     }
 }
