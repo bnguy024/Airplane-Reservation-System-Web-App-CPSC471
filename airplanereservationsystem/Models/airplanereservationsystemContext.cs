@@ -402,11 +402,11 @@ namespace airplanereservationsystem.Models
 
                 entity.Property(e => e.ReservationSystemId).HasColumnName("reservation_system_id");
 
-                entity.Property(e => e.ReturnUrl)
+               /* entity.Property(e => e.ReturnUrl)
                     .IsRequired()
                     .HasColumnType("varchar(255)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCollation("utf8mb4_0900_ai_ci");*/
 
                 entity.Property(e => e.UserId).HasColumnName("User_ID");
 
