@@ -37,6 +37,42 @@ namespace airplanereservationsystem.Controllers
             }
             return View(reservations);
         }
+
+        public ViewResult GetReservation() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> GetReservation(int Route)
+        {
+            Arrival arrival = new Arrival();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Arrivals/" + Route))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        arrival = JsonConvert.DeserializeObject<Arrival>(apiResponse);
+                    }
+                    else
+                        ViewBag.StatusCode = response.StatusCode;
+                }
+            }
+            return View(arrival);
+        }
+
+        public async Task<IActionResult> ViewDepartures()
+        {
+            List<Departure> reservationList = new List<Departure>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Departures"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    reservationList = JsonConvert.DeserializeObject<List<Departure>>(apiResponse);
+                }
+            }
+            return View(reservationList);
+        }
     }
 }
        

@@ -1,30 +1,31 @@
-﻿@model IEnumerable<Arrival>
-@{ Layout = "_Layout"; ViewBag.Title = "Arrivals";}
+﻿@model IEnumerable<Departure>
+@{ Layout = "_Layout"; ViewBag.Title = "Departure";}
 
 <h2>All Reservations</h2>
 <a asp-action="AddReservation" class="btn btn-sm btn-primary">Add Reservation</a>
 <a asp-action="GetReservation" class="btn btn-sm btn-secondary">Get Reservation</a>
-<a asp-action="ViewDepartures" class="btn btn-sm btn-secondary">View Departures</a>
+<h2><a asp-action="Index" class="btn btn-sm btn-primary">Back</a></h2>
 
 <table class="table table-sm table-striped table-bordered m-2">
     <thead>
         <tr>
             <th>Route Number</th>
             <th>Airport</th>
-            <th>Scheduled Arrival Date</th>
-            <th>Scheduled Arrival Time</th>
-      
+            <th>Scheduled Departure Date</th>
+            <th>Scheduled Departure Time</th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var r in Model)
         {
-        <tr>
-            <td>@r.RouteNum</td>
-            <td>@r.AirportCode</td>
-            <td>@r.Date</td>
-            <td>@r.ScheduleArrTime</td>
-        </tr>
+            <tr>
+                <td>@r.RouteNum</td>
+                <td>@r.AirportCode</td>
+                <td>@r.Date</td>
+                <td>@r.ScheduleDepTime</td>
+
+            </tr>
         }
     </tbody>
 </table>

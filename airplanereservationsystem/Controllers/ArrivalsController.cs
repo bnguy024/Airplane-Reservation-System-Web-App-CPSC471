@@ -28,7 +28,7 @@ namespace airplanereservationsystem.Controllers
         }
 
         // GET: api/Arrivals/5
-        [HttpGet("{id}")]
+        [HttpGet("{routenum}")]
         public async Task<ActionResult<Arrival>> GetArrival(int routenum)
         {
             var arrival = _context.Arrival.Where(pub => pub.RouteNum == routenum).FirstOrDefault();
