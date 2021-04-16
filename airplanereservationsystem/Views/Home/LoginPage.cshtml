@@ -1,0 +1,32 @@
+﻿
+@{ Layout = "_Layout"; ViewBag.Title = "User Login";}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoginPage</title>
+</head>
+
+<body>
+    <div class="login">
+        <h1>Login</h1>
+        <form class="form_group" id="form" action="Home/Authorized">
+            <div>
+                <label for="email">Email</label>
+                <input type="text" class="form-control login-email" placeholder="example@email.com" />
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="text" class="form-control login-password" placeholder="password" />
+            </div>
+
+            <input class="submit-form" type="submit" />
+
+            <div class="admin-login">
+                <a href="Admin-Home">Sign in as Admin</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+
