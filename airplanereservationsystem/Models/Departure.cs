@@ -6,6 +6,7 @@ namespace airplanereservationsystem.Models
     public partial class Departure
     {
         public string AirportCode { get; set; }
+        public string Date { get; set; }
         public int LegNum { get; set; }
         public int RouteNum { get; set; }
         public string ScheduleDepTime { get; set; }

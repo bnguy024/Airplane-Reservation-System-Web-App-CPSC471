@@ -135,5 +135,13 @@
     <None Include="wwwroot\lib\twitter-bootstrap\scss\_variables.scss" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Hpage\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 
 </Project>

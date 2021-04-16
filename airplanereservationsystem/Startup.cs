@@ -54,10 +54,16 @@ namespace airplanereservationsystem
             app.UseEndpoints(endpoints =>
             {
        
-                endpoints.MapControllerRoute(
+               /* endpoints.MapControllerRoute(
                       name: "default",
-                      pattern: "{controller=Home}/{action=index}/{id?}"
-                      );
+                      pattern: "{controller=Home}/{action=Index}/{id?}"
+                      );*/
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=home}/{action=homepage}/{id?}"
+
+                    );
+
             });
         }
     }

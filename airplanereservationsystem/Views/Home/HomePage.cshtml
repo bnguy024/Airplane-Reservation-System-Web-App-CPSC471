@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Departure>
+@{ Layout = "_Layout"; ViewBag.Title = "HomePage";
+}
+  
+<div class="d-flex h-100 text-center text-white bg-light">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+        <main class="text-dark">
+            <h1>Welcome</h1>
+            <p class="text-dark">Book your next flight reservation with us.</p>
+            <p class="text-dark">
+                <table class="table table-sm table-striped table-bordered m-2">
+                    <thead>
+                        <tr>
+                            <th>Route Number</th>
+                            <th>Airport</th>
+                            <th>Scheduled Departure Date</th>
+                            <th>Scheduled Depature Time</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model)
+                        {
+                            <tr>
+                                <td>@r.RouteNum</td>
+                                <td>@r.AirportCode</td>
+                                <td>@r.Date</td>
+                                <td>@r.ScheduleDepTime</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="/home/index" class="btn btn-lg btn-secondary fw-bold border-white bg-dark">Reserve Now</a>
+            </p>
+        </main>
+    </div>
+</div>
+

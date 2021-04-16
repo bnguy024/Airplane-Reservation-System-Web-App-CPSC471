@@ -24,5 +24,21 @@ namespace airplanereservationsystem.Controllers
             }
             return View(reservationList);
         }
+        public async Task<IActionResult> HomePage()
+        {
+            List<Departure> reservations = new List<Departure>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Departures"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    reservations = JsonConvert.DeserializeObject<List<Departure>>(apiResponse);
+                }
+            }
+            return View(reservations);
+        }
     }
 }
+       
+    
+

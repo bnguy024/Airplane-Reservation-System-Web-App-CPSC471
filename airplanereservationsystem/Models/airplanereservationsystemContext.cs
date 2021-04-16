@@ -386,6 +386,13 @@ namespace airplanereservationsystem.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.PhoneNum)
                     .IsRequired()
                     .HasColumnName("phone_num")
@@ -394,6 +401,12 @@ namespace airplanereservationsystem.Models
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.ReservationSystemId).HasColumnName("reservation_system_id");
+
+                entity.Property(e => e.ReturnUrl)
+                    .IsRequired()
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.UserId).HasColumnName("User_ID");
 
@@ -432,6 +445,12 @@ namespace airplanereservationsystem.Models
                 entity.Property(e => e.LegNum).HasColumnName("Leg_num");
 
                 entity.Property(e => e.RouteNum).HasColumnName("Route_num");
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.ScheduleDepTime)
                     .HasColumnName("schedule_dep_time")
