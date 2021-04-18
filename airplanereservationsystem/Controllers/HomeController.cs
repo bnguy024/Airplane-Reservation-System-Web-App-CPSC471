@@ -5,6 +5,7 @@ using airplanereservationsystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -113,10 +114,7 @@ namespace airplanereservationsystem.Controllers
             }
             return View(departure);
         }
-        public ActionResult LoginPage()
-        {
-            return View();
-        }
+    
         public ViewResult AddDepartureReservation() => View();
         [HttpPost]
         public async Task<IActionResult> AddDepartureReservation(Departure departure)
@@ -133,6 +131,38 @@ namespace airplanereservationsystem.Controllers
                 }
             }
             return View(receivedReservation);
+        }
+
+        public ViewResult LoginPage() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> CustomerHome(string inputEmail, string inputPass)
+        {
+
+            Customer customer = new Customer();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Customer/"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+
+                        customer = JsonConvert.DeserializeObject<Customer>(apiResponse);
+                    }
+                    else
+                        ViewBag.StatusCode = response.StatusCode;
+                }
+            }
+
+            Console.Write("Customer Email: " + customer.Email);
+
+            if (inputEmail == "you@gmail.com" && inputPass == "password")
+            {
+                return View(customer);
+            }
+            return Redirect("LoginPage");
+
         }
     }
 }

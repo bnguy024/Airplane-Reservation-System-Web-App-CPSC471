@@ -1,0 +1,33 @@
+﻿@model Customer
+@{ Layout = "_Layout"; ViewBag.Title = "Customer Home";}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CustomerHomePage</title>
+</head>
+
+<body>
+    <h1>You logged in good job</h1>
+</body>
+
+
+@if (Model != null)
+{
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>Customer Id</th>
+                <th>Email</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.CustomerId</td>
+                <td>@Model.Email</td>
+
+            </tr>
+        </tbody>
+    </table>
+}

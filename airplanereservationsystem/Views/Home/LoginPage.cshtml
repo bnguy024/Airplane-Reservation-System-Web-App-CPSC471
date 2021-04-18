@@ -7,26 +7,25 @@
     <title>LoginPage</title>
 </head>
 
+
 <body>
-    <div class="login">
-        <h1>Login</h1>
-        <form class="form_group" id="form" action="Home/Authorized">
+    @using (Html.BeginForm("CustomerHome", "Home", FormMethod.Post))
+    {
+        <div>
+            <h1>Login</h1>
+
             <div>
-                <label for="email">Email</label>
-                <input type="text" class="form-control login-email" placeholder="example@email.com" />
+                @Html.Label("Email")
+                @Html.TextBox("inputEmail")
             </div>
             <div>
-                <label for="password">Password</label>
-                <input type="text" class="form-control login-password" placeholder="password" />
+                @Html.Label("Password")
+                @Html.TextBox("inputPass")
             </div>
 
-            <input class="submit-form" type="submit" />
-
-            <div class="admin-login">
-                <a href="Admin-Home">Sign in as Admin</a>
-            </div>
-        </form>
-    </div>
+            <button>Login</button>
+        </div>
+    }
 </body>
 
 
