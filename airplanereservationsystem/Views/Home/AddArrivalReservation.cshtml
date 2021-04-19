@@ -8,6 +8,14 @@
         <input class="form-control" name="AirportCode" />
     </div>
     <div class="form-group">
+        <label for="RouteNum">Route Number:</label>
+        <input class="form-control" name="RouteNum" />
+    </div>
+    <div class="form-group">
+        <label for="LegNum">Leg ID:</label>
+        <input class="form-control" name="LegNum" />
+    </div>
+    <div class="form-group">
         <label for="Date">Arrival Date:</label>
         <input class="form-control" name="Date" />
     </div>
@@ -26,16 +34,18 @@
     <table class="table table-sm table-striped table-bordered m-2">
         <thead>
             <tr>
-                <th>Route Number</th>
                 <th>Airport</th>
+                <th>Route Number</th>
+                <th>Leg ID</th>
                 <th>Arrival Date</th>
                 <th>Arrival Time</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@Model.RouteNum</td>
                 <td>@Model.AirportCode</td>
+                <td>@Model.RouteNum</td>
+                <td>@Model.LegNum</td>
                 <td>@Model.Date</td>
                 <td>@Model.ScheduleArrTime</td>
             </tr>
