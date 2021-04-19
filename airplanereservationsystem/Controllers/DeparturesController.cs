@@ -31,7 +31,7 @@ namespace airplanereservationsystem.Controllers
         [HttpGet("{routenum}")]
         public async Task<ActionResult<Departure>> GetDeparture(int routenum)
         {
-            var departure = _context.Departure.Where(pub => pub.RouteNum == routenum).FirstOrDefault();
+            var departure = await _context.Departure.Where(dep => dep.RouteNum == routenum).FirstOrDefaultAsync();
 
             if (departure == null)
             {
@@ -103,7 +103,7 @@ namespace airplanereservationsystem.Controllers
         [HttpDelete("{routenum}")]
         public async Task<ActionResult<Departure>> DeleteDeparture(int routenum)
         {
-            var departure = await _context.Departure.FindAsync(routenum);
+            var departure = await _context.Departure.Where(dep => dep.RouteNum == routenum).FirstOrDefaultAsync();
             if (departure == null)
             {
                 return NotFound();

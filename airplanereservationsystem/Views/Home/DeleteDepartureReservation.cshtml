@@ -1,0 +1,15 @@
+﻿@model Departure
+@{ Layout = "_Layout"; ViewBag.Title = "Delete Departure Reservation by Route Number";}
+
+<h2>Delete Reservation by Route Number <a asp-action="ViewDepartures" class="btn btn-sm btn-primary">Back</a></h2>
+<h3>@ViewBag.StatusCode</h3>
+<form method="post">
+    <div class="form-group">
+        <label for="RouteNum">Route Number:</label>
+        <input class="form-control" name="RouteNum" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Delete Reservation</button>
+    </div>
+</form>
+

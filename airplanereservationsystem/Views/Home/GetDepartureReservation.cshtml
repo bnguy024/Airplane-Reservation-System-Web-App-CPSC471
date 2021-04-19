@@ -5,8 +5,8 @@
 <h3>@ViewBag.StatusCode</h3>
 <form method="post">
     <div class="form-group">
-        <label for="Route">Route:</label>
-        <input class="form-control" name="Route" />
+        <label for="RouteNum">Route Number:</label>
+        <input class="form-control" name="RouteNum" />
     </div>
     <div class="text-center panel-body">
         <button type="submit" class="btn btn-sm btn-primary">Get Reservation</button>
@@ -14,7 +14,7 @@
 </form>
 
 @if (Model != null)
-{
+{   
     <h2>Reservation</h2>
     <table class="table table-sm table-striped table-bordered m-2">
         <thead>

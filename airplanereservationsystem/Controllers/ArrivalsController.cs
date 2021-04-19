@@ -28,10 +28,10 @@ namespace airplanereservationsystem.Controllers
         }
 
         // GET: api/Arrivals/5
-        [HttpGet("GetArrival/{routenum}")]
+        [HttpGet("{routenum}")]
         public async Task<ActionResult<Arrival>> GetArrival(int routenum)
         {
-            var arrival = _context.Arrival.Where(pub => pub.RouteNum == routenum).FirstOrDefault();
+            var arrival = await _context.Arrival.Where(arr => arr.RouteNum == routenum).FirstOrDefaultAsync();
 
             if (arrival == null)
             {
@@ -103,7 +103,7 @@ namespace airplanereservationsystem.Controllers
         [HttpDelete("{routenum}")]
         public async Task<ActionResult<Arrival>> DeleteArrival(int routenum)
         {
-            var arrival = await _context.Arrival.FindAsync(routenum);
+            var arrival = await _context.Arrival.Where(arr => arr.RouteNum == routenum).FirstOrDefaultAsync();
             if (arrival == null)
             {
                 return NotFound();

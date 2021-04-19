@@ -4,7 +4,8 @@
 <h2>Arrival Flights</h2>
 <a asp-action="AddArrivalReservation" class="btn btn-sm btn-primary">Add Arrival Reservation</a>
 <a asp-action="GetArrivalReservation" class="btn btn-sm btn-secondary">Get Arrival Reservation</a>
-<a asp-action="ViewDepartures" class="btn btn-sm btn-secondary">View Departures</a>
+<a asp-action="DeleteArrivalReservation" class="btn btn-sm btn-secondary">Delete Arrival Reservation</a>
+
 
 <table class="table table-sm table-striped table-bordered m-2">
     <thead>
@@ -13,18 +14,18 @@
             <th>Airport</th>
             <th>Scheduled Arrival Date</th>
             <th>Scheduled Arrival Time</th>
-      
+
         </tr>
     </thead>
     <tbody>
         @foreach (var r in Model)
         {
-        <tr>
-            <td>@r.RouteNum</td>
-            <td>@r.AirportCode</td>
-            <td>@r.Date</td>
-            <td>@r.ScheduleArrTime</td>
-        </tr>
+            <tr>
+                <td>@r.RouteNum</td>
+                <td>@r.AirportCode</td>
+                <td>@r.Date</td>
+                <td>@r.ScheduleArrTime</td>
+            </tr>
         }
     </tbody>
 </table>

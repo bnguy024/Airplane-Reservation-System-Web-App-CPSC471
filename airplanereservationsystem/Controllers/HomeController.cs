@@ -93,15 +93,33 @@ namespace airplanereservationsystem.Controllers
             }
             return View(receivedReservation);
         }
+
+        public ViewResult DeleteArrivalReservation() => View();
+        [HttpPost]
+        public async Task<IActionResult> DeleteArrivalReservation(int route)
+        {
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync("https://localhost:5001/api/Arrivals/" + route))
+
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+
+            }
+            return RedirectToAction("Index");
+        }
+
         public ViewResult GetDepartureReservation() => View();
 
         [HttpPost]
-        public async Task<IActionResult> GetDepartureReservation(int Route)
+        public async Task<IActionResult> GetDepartureReservation(int route)
         {
             Departure departure = new Departure();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Departures/" + Route))
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Departures/" + route))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -131,6 +149,24 @@ namespace airplanereservationsystem.Controllers
                 }
             }
             return View(receivedReservation);
+        }
+        public ViewResult DeleteDepartureReservation() => View();
+        [HttpPost]
+        public async Task<IActionResult> DeleteDepartureReservation(int route)
+        {
+       
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync("https://localhost:5001/api/Departures/" + route))
+                
+                {
+                  string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+                
+                
+            }
+
+            return RedirectToAction("ViewDepartures");
         }
 
         public ViewResult LoginPage() => View();
